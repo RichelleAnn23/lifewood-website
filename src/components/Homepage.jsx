@@ -181,10 +181,10 @@ const Homepage = () => {
     extraImage: {
       flex: 1,
       width: "100%",
-      maxWidth: "500px", // keeps it balanced
-      borderRadius: "8px", // formal corners
-      border: "3px solid #ddd", // subtle frame
-      boxShadow: "0 6px 15px rgba(0,0,0,0.15)", // softer shadow
+      maxWidth: "500px", 
+      borderRadius: "8px", 
+      border: "3px solid #ddd", 
+      boxShadow: "0 6px 15px rgba(0,0,0,0.15)", 
       objectFit: "cover",
       transition: "transform 0.3s ease",
     },
@@ -231,13 +231,13 @@ const Homepage = () => {
         />
       </div>
 
-                  {/* Section 1 */}
+      {/* Section 1 */}
       <div
         style={{
           ...styles.extraSection,
           background: "#ffffff",
-          padding: "60px 90px", // tighter than 80px 100px
-          gap: "20px", // reduced gap between heading, text
+          padding: "60px 90px", 
+          gap: "20px", 
         }}
       >
         <h2
@@ -247,7 +247,7 @@ const Homepage = () => {
             WebkitTextFillColor: "#046241",
             marginTop: "0",
             fontSize: "34px",
-            marginBottom: "10px", // tighter heading spacing
+            marginBottom: "10px", 
           }}
         >
           Why Choose Lifewood?
@@ -342,8 +342,8 @@ const Homepage = () => {
           flexDirection: "row",
           alignItems: "center",
           textAlign: "left",
-          gap: "30px", // reduced from 40px
-          padding: "60px 90px", // tighter
+          gap: "30px",
+          padding: "60px 90px",
         }}
       >
         {/* Text Content */}

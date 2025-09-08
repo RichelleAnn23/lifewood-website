@@ -5,7 +5,6 @@ const Form = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  // ✅ State for form fields
   const [formData, setFormData] = useState({
     fullName: "",
     age: "",
@@ -184,7 +183,7 @@ const Form = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:5000/api/applications", {
+      const response = await fetch("https://lifewood-website.onrender.com/api/applications", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -194,7 +193,7 @@ const Form = () => {
 
       if (response.ok) {
         setShowPopup(true);
-        setErrorMessage(""); // clear errors
+        setErrorMessage("");
         setFormData({
           fullName: "",
           age: "",

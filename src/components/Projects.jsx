@@ -6,7 +6,7 @@ const Projects = () => {
     page: {
       margin: 0,
       padding: 0,
-      minHeight: "100vh", // allow footer to go down
+      minHeight: "100vh",
       width: "100vw",
       overflowX: "hidden",
       backgroundColor: "#f5f5f5",
@@ -56,7 +56,7 @@ const Projects = () => {
       fontWeight: "bold",
       color: "#133020",
       backgroundColor: "#f5eedb",
-      paddingTop: "120px", // space for navbar
+      paddingTop: "120px", 
     },
     footerText: {
       color: "#ffffff",
@@ -64,7 +64,7 @@ const Projects = () => {
       textAlign: "center",
       padding: "20px 0",
       width: "100%",
-      background: "linear-gradient(90deg, #133020, #046241)", // green gradient like homepage
+      background: "linear-gradient(90deg, #133020, #046241)",
     },
   };
 

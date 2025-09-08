@@ -67,7 +67,7 @@ const Edit = ({ applicant, onClose, onUpdate }) => {
     },
     buttonWrapper: {
       display: "flex",
-      justifyContent: "flex-end", // ✅ buttons on the right
+      justifyContent: "flex-end", 
       gap: "15px",
       marginTop: "10px",
       width: "100%",
@@ -126,7 +126,7 @@ const Edit = ({ applicant, onClose, onUpdate }) => {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/applications/${formData._id}`,
+        `https://lifewood-website.onrender.com/api/applications/${formData._id}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },

@@ -247,7 +247,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchApplicants = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/applications");
+        const response = await fetch("https://lifewood-website.onrender.com/api/applications");
         const data = await response.json();
         setAdminInfo(data.filter((a) => a.status === "Pending"));
         setHistory(
@@ -284,7 +284,7 @@ const AdminDashboard = () => {
 
   const handleAccept = async (id) => {
     try {
-      await fetch(`http://localhost:5000/api/applications/accept/${id}`, {
+      await fetch(`https://lifewood-website.onrender.com/api/applications/accept/${id}`, {
         method: "POST",
       });
       moveToHistory(id, "Accepted");
@@ -296,7 +296,7 @@ const AdminDashboard = () => {
 
   const handleDecline = async (id) => {
     try {
-      await fetch(`http://localhost:5000/api/applications/decline/${id}`, {
+      await fetch(`https://lifewood-website.onrender.com/api/applications/decline/${id}`, {
         method: "POST",
       });
       moveToHistory(id, "Declined");
@@ -308,7 +308,7 @@ const AdminDashboard = () => {
 
   const handleDeleteHistory = async (id) => {
     try {
-      await fetch(`http://localhost:5000/api/applications/${id}`, {
+      await fetch(`https://lifewood-website.onrender.com/api/applications/${id}`, {
         method: "DELETE",
       });
       setHistory((prev) => prev.filter((record) => record._id !== id));
