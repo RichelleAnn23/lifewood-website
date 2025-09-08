@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 const Form = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false); // disable button while submitting
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -124,7 +125,8 @@ const Form = () => {
       fontWeight: "600",
       border: "none",
       borderRadius: "12px",
-      cursor: "pointer",
+      cursor: isSubmitting ? "not-allowed" : "pointer",
+      opacity: isSubmitting ? 0.6 : 1,
       transition: "transform 0.2s ease, box-shadow 0.3s ease",
     },
     error: {
@@ -181,33 +183,43 @@ const Form = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    setErrorMessage("");
 
     try {
-      const response = await fetch("https://lifewood-website.onrender.com/api/applications", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        "https://lifewood-website.onrender.com/api/applications",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        }
+      );
 
-      const data = await response.json();
-
-      if (response.ok) {
-        setShowPopup(true);
-        setErrorMessage("");
-        setFormData({
-          fullName: "",
-          age: "",
-          degree: "",
-          experience: "",
-          email: "",
-          projectAppliedFor: "",
-        });
-      } else {
-        setErrorMessage(data.error || "Something went wrong. Please try again.");
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(
+          errorData.error || `Server responded with status ${response.status}`
+        );
       }
+
+      // success
+      setShowPopup(true);
+      setFormData({
+        fullName: "",
+        age: "",
+        degree: "",
+        experience: "",
+        email: "",
+        projectAppliedFor: "",
+      });
     } catch (error) {
       console.error("Error submitting form:", error);
-      setErrorMessage("Failed to connect to backend.");
+      setErrorMessage(
+        "Failed to submit. Please check your internet connection or try again later."
+      );
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -219,11 +231,7 @@ const Form = () => {
     <div style={styles.page}>
       {/* Navbar */}
       <nav style={styles.navbar}>
-        <img
-          src="/images/lifewoodlogo.png"
-          alt="Lifewood Logo"
-          style={styles.logo}
-        />
+        <img src="/images/lifewoodlogo.png" alt="Lifewood Logo" style={styles.logo} />
         <ul style={styles.navLinks}>
           <li>
             <Link to="/" style={styles.link}>
@@ -329,11 +337,10 @@ const Form = () => {
             </select>
           </div>
 
-          {/* Error Message */}
           {errorMessage && <p style={styles.error}>{errorMessage}</p>}
 
-          <button type="submit" style={styles.button}>
-            Submit Application
+          <button type="submit" style={styles.button} disabled={isSubmitting}>
+            {isSubmitting ? "Submitting..." : "Submit Application"}
           </button>
         </form>
       </div>
@@ -344,8 +351,7 @@ const Form = () => {
           <div style={styles.popupBox}>
             <h3 style={styles.popupTitle}>Application Submitted!</h3>
             <p style={styles.popupMessage}>
-              Thank you for filling out the form. We will review your
-              application soon.
+              Thank you for filling out the form. We will review your application soon.
             </p>
             <button style={styles.popupButton} onClick={closePopup}>
               Close
